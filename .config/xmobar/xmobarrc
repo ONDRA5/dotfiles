@@ -1,0 +1,56 @@
+Config { 
+        
+       -- Appearance
+         font    = "xft:Hack Nerd Font:size=9:antiaias=true:autohint=true"
+       , additionalFonts = [ "xft:FontAwesome:pixelsize=10" ]
+       , bgColor         = "#282828"
+       , fgColor         = "#ebdbb2"
+       , position        = Top
+       , alpha           = 255
+
+       -- Layout
+       , sepChar         = "%"
+       , alignSep        = "}{"
+       , template        = " %UnsafeStdinReader% }{ <fc=#b8bb26>%internet%</fc>| <fc=#fe8019>%memory%</fc> | <fc=#fc9f24>%cpu%</fc> |<fc=#fabd2f>%pacupdate%</fc>| <fc=#d3869b>%alsa:default:Master%</fc>| <fc=#83a598>%battery%</fc> | <fc=#8ec07c>%date%</fc>"
+
+       -- General behavior
+       , lowerOnStart    = True
+       , hideOnStart     = False
+       , allDesktops     = True
+       , persistent      = True
+       , commands        = [
+                            -- Volume
+                            Run Alsa "default" "Master" []
+                            -- Time and date
+                          , Run Date "\xf133 %b %d %Y (%H:%M)" "date" 50
+                            -- Cpu usage in %
+                          , Run Cpu ["-t", "\xf108  (<total>%)","-H","50","--high","red"] 20
+                            -- Ram used
+                          , Run Memory ["-t", "﬚  (<usedratio>%)"] 20
+                            -- Pacman updates
+                          , Run Com "pacupdate" [] "" 36000
+                            -- Volume indicator
+                            -- , Run Com "/home/ondra/.local/bin/volumebar" [] "" 10
+                            -- Connection indicatior
+                          , Run Com "internet" [] "" 1000
+                           -- battery monitor
+                          , Run Battery 
+                             [ "--template" , "Batt: <acstatus>"
+                             , "--Low"      , "10"        -- units: %
+                             , "--High"     , "80"        -- units: %
+                             , "--low"      , "#cc241d"
+                             , "--normal"   , "#83a598"
+                             , "--high"     , "#83a598"
+
+                             , "--" -- battery specific options
+                                       -- discharging status
+                                       , "-o"	, "<left>%" -- (<timeleft>)"
+                                       -- AC "on" status
+                                       , "-O"	, "<fc=#83a598>Charging</fc>"
+                                       -- charged status
+                                       , "-i"	, "<fc=#83a598>Charged</fc>"
+                             ] 50
+                             -- Workspaces
+                           , Run UnsafeStdinReader
+                            ]
+}                            
