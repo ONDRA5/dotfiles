@@ -1,0 +1,5 @@
+"query:Linux OC:tags # \"content\" or title =~ \"\\[OC\\]\"" meta 
+"query:Unread:unread = \"yes\"" meta
+
+https://www.reddit.com/r/unixporn/new.rss reddit
+https://www.fzs.tul.cz/novinky/rss school
