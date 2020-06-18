@@ -103,7 +103,7 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
 myAppGrid :: [(String, String)]
 myAppGrid = [ ("Firefox", "firefox")
             , ("qutebrowser", "qutebrowser")
-            , ("ThunderBird", "thunderbird")
+            , ("Weather Radar", "weatherradar")
             , ("Spotify", "st -e sptui")
             , ("NewsBoat", "st -e newsboat")
             , ("ViFm", "st -e vifm")
