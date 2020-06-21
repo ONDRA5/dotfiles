@@ -135,6 +135,10 @@ alias clivid="mplayer -really-quiet -vo -caca"
 alias pipes="pipes -t 9"
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 alias vifm="$HOME/.config/vifm/scripts/./vifmrun"
+#alias mpv="devour mpv"
+#alias zathura="devour zathura"
+#alias libreoffice="devour libreoffice"
+#alias sxiv="devour sxiv"
 
 [[ -z $DISPLAY && XDG_VTNR -eq 1 ]] && exec startx
 
