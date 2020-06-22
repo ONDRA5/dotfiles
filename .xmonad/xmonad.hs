@@ -127,8 +127,8 @@ main = do
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmproc0 x 
                         , ppCurrent = xmobarColor "#fb4934" "" . wrap "[" "]" -- Current workspace in xmobar
-                        , ppHidden = xmobarColor "#8ec07c" "" . wrap "*" ""   -- Hidden workspaces in xmobar
-                        , ppHiddenNoWindows = xmobarColor "#ebdbb2" ""        -- Hidden workspaces (no windows)
+                        , ppHidden = xmobarColor "#FE8019" "" . wrap "*" ""   -- Hidden workspaces in xmobar
+                        , ppHiddenNoWindows = xmobarColor "#8ec07c" ""        -- Hidden workspaces (no windows)
                         , ppTitle = xmobarColor "#ebdbb2" "" . shorten 30     -- Title of active window in xmobar
                         , ppSep =  "<fc=#ebdbb2> | </fc>"                     -- Separators in xmobar
                         , ppUrgent = xmobarColor "#cc241d" "" . wrap "!" "!"  -- Urgent workspace
