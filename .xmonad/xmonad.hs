@@ -171,7 +171,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_e     ), spawn "dmenuexit.sh")
     , ((modm .|. shiftMask, xK_m     ), spawn "dmenumount")
     , ((modm .|. shiftMask, xK_u     ), spawn "dmenuumount")
-    , ((modm,               xK_d     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    , ((modm,            xK_BackSpace), spawn "dmenufm")
+    , ((modm,               xK_d     ), spawn "dmenu_run -i")
     -- launch XMonad prompt
     --, ((modm,               xK_d     ), shellPrompt oXPConfig)
     -- launching apps
