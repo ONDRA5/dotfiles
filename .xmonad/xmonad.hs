@@ -38,6 +38,7 @@ import XMonad.Actions.CopyWindow (kill1, copyToAll, killAllOtherCopies, runOrCop
 import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
 import XMonad.Actions.MouseResize
 import XMonad.Actions.GridSelect
+import XMonad.Actions.Submap
 
     -- Layouts modifiers
 import XMonad.Layout.PerWorkspace (onWorkspace) 
@@ -177,6 +178,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --, ((modm,               xK_d     ), shellPrompt oXPConfig)
     -- launching apps
     , ((modm,               xK_a     ), spawnSelected' myAppGrid)
+    -- Submaps
+    , ((modm .|. shiftMask, xK_a     ), submap . M.fromList $
+         [ ((0, xK_q),    spawn "qutebrowser")
+         ])
     -- window manipulation
     , ((modm .|. shiftMask, xK_q     ), kill1) -- close a window
     , ((modm,               xK_space ), sendMessage NextLayout) -- rotate layouts
