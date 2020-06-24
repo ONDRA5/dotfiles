@@ -37,7 +37,6 @@ import XMonad.Actions.Promote
 import XMonad.Actions.CopyWindow (kill1, copyToAll, killAllOtherCopies, runOrCopy)
 import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
 import XMonad.Actions.MouseResize
-import XMonad.Actions.GridSelect
 import XMonad.Actions.Submap
 
     -- Layouts modifiers
@@ -68,54 +67,12 @@ import Graphics.X11.ExtraTypes.XF86
 ---VARIABLES
 ------------------------------------------------------------------------
 myFont          = "xft:Hack Nerd Font:size=10:antialias=true:autohint=true"
-myGridFont      = "xft:Hack Nerd Font:size=15:antialias=true:autohint=true"
 myModMask       = mod4Mask
 myTerminal      = "st"
 myTextEditor    = "nvim"
 myBorderWidth   = 2
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
-------------------------------------------------------------------------
---GRID SELECT
-------------------------------------------------------------------------
-myColorizer :: Window -> Bool -> X (String, String)
-myColorizer = colorRangeFromClassName
-                  (0x29,0x2d,0x3e) -- lowest inactive bg
-                  (0x29,0x2d,0x3e) -- highest inactive bg
-                  (0xc7,0x92,0xea) -- active bg
-                  (0xc0,0xa7,0x9a) -- inactive fg
-                  (0x29,0x2d,0x3e) -- active fg
-                  
--- gridSelect menu layout
-mygridConfig :: p -> GSConfig Window
-mygridConfig colorizer = (buildDefaultGSConfig myColorizer)
-    { gs_cellheight   = 60
-    , gs_cellwidth    = 250
-    , gs_cellpadding  = 8
-    , gs_originFractX = 0.5
-    , gs_originFractY = 0.5
-    , gs_font         = myGridFont
-    }
 
-spawnSelected' :: [(String, String)] -> X ()
-spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
-    where conf = def
-
--- Set favorite apps for the spawnSelected'
-myAppGrid :: [(String, String)]
-myAppGrid = [ ("Firefox", "firefox")
-            , ("qutebrowser", "qutebrowser")
-            , ("Weather Radar", "weatherradar")
-            , ("Spotify", "st -e sptui")
-            , ("NewsBoat", "st -e newsboat")
-            , ("ViFm", "st -e vifm")
-            , ("Simple Terminal", "st")
-            , ("Neomutt", "st -e neomutt")
-            , ("Calendar", "st -e calcurse")
-            , ("Gimp", "gimp")
-            , ("PcManFM", "pcmanfm")
-            , ("Inkscape", "inkscape")
-            , ("LibreOffice Writer", "lowriter")
-            ]
 ------------------------------------------------------------------------
 --MAIN
 ------------------------------------------------------------------------
@@ -174,20 +131,24 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_u     ), spawn "dmenuumount")
     , ((modm,            xK_BackSpace), spawn "dmenufm")
     , ((modm,               xK_d     ), spawn "dmenu_run -i")
+    , ((modm,               xK_o     ), spawn "dmenuduck")
+    , ((modm,               xK_Tab   ), spawn "dswitcher")
     -- launch XMonad prompt
     --, ((modm,               xK_d     ), shellPrompt oXPConfig)
     -- launching apps
-    , ((modm,               xK_a     ), spawnSelected' myAppGrid)
     -- Submaps
-    , ((modm .|. shiftMask, xK_a     ), submap . M.fromList $
+    , ((modm,               xK_a     ), submap . M.fromList $
          [ ((0, xK_q),    spawn "qutebrowser")
+         , ((0, xK_f),    spawn "firefox")
+         , ((0, xK_n),    spawn "st -e newsboat")
+         , ((0, xK_c),    spawn "st -e calcurse")
+         , ((0, xK_b),    spawn "dmenu_websearch")
          ])
     -- window manipulation
     , ((modm .|. shiftMask, xK_q     ), kill1) -- close a window
     , ((modm,               xK_space ), sendMessage NextLayout) -- rotate layouts
     , ((modm .|. shiftMask, xK_space ), sendMessage FirstLayout) -- default layout
     , ((modm,               xK_n     ), refresh) -- resize viewed windows to the correct size
-    , ((modm,               xK_Tab   ), windows W.focusDown) -- move focus
     , ((modm,               xK_j     ), windows W.focusDown) -- move focus
     , ((modm,               xK_k     ), windows W.focusUp  ) -- move focus
     , ((modm,               xK_m     ), windows W.swapMaster) -- make the current window master
@@ -198,7 +159,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_t     ), withFocused $ windows . W.sink) -- push window back into tiling
     , ((modm .|. shiftMask, xK_i     ), sendMessage (IncMasterN 1)) -- increment the number of windows in master
     , ((modm .|. shiftMask, xK_d     ), sendMessage (IncMasterN (-1))) -- decrease the number of windows in master
-    , ((modm .|. shiftMask, xK_o     ), sendMessage Mag.Toggle) -- magnify a window --this doesn't do jackshit, I need to fix that
     , ((modm,               xK_b     ), sendMessage ToggleStruts) -- toggle bar
     -- Multimedia keys
     , ((0 , xF86XK_AudioLowerVolume  ), spawn "amixer -q -D pulse sset Master 5%-")
