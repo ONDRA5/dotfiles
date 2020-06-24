@@ -143,6 +143,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          , ((0, xK_n),    spawn "st -e newsboat")
          , ((0, xK_c),    spawn "st -e calcurse")
          , ((0, xK_b),    spawn "dmenu_websearch")
+         , ((0, xK_w),    spawn "weatherradar")
          ])
     -- window manipulation
     , ((modm .|. shiftMask, xK_q     ), kill1) -- close a window
