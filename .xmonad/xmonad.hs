@@ -144,6 +144,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          , ((0, xK_c),    spawn "st -e calcurse")
          , ((0, xK_b),    spawn "dmenu_websearch")
          , ((0, xK_w),    spawn "weatherradar")
+         , ((0, xK_m),    spawn "st -e neomutt")
          ])
     -- window manipulation
     , ((modm .|. shiftMask, xK_q     ), kill1) -- close a window
@@ -183,15 +184,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (i, k) <- zip (XMonad.workspaces conf) [xK_plus, xK_ecaron, xK_scaron, xK_ccaron, xK_rcaron, xK_zcaron, xK_yacute, xK_aacute, xK_iacute]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     
-       -- ++
+        ++
     --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+    -- mod-{backslash,y,x}, Switch to physical/Xinerama screens 1, 2, or 3
+    -- mod-shift-{backslash,y,x}, Move client to screen 1, 2, or 3
     --
 
-    --[((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      --  | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        --, (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_backslash, xK_y, xK_x] [0..]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
