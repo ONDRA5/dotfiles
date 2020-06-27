@@ -58,6 +58,7 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ZoomRow (zoomRow, zoomIn, zoomOut, zoomReset, ZoomMessage(ZoomFullToggle))
 import XMonad.Layout.IM (withIM, Property(Role))
+import XMonad.Layout.ThreeColumns (ThreeCol(..))
 import qualified XMonad.Layout.Magnifier as Mag
 
     -- Keyboard stuff
@@ -257,6 +258,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                ||| magnify -- this is here just as a workaround, because the keybinding for it doesn't work...
                                ||| threeRow 
                                ||| noBorders monocle
+                               ||| threeColMid
 
 
 tall       = renamed [Replace "tall"]
@@ -277,4 +279,7 @@ magnify    = renamed [Replace "magnify"]
              $ limitWindows 12
              $ spacing 0
              $ ResizableTall 1 (3/100) (1/2) []
-
+threeColMid = renamed [Replace "threeColMid"]
+             $ limitWindows 5
+             $ spacing 4
+             $ ThreeColMid 1 (3/100) (1/2)
