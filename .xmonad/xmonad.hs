@@ -148,6 +148,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          , ((0, xK_b),    spawn "dmenu_websearch")
          , ((0, xK_w),    spawn "weatherradar")
          , ((0, xK_m),    spawn "st -e neomutt")
+         , ((0, xK_t),    spawn "telegram-desktop")
          ])
     -- workspace switching back and forth
     , ((modm,               xK_Tab   ), toggleWS)
