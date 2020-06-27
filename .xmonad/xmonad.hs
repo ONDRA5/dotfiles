@@ -125,6 +125,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
     [ ((modm,               xK_Return ), spawn $ XMonad.terminal conf)
+    -- make fullscreen
+    , ((modm,               xK_f     ), sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts)
     -- dmenu stuff
     , ((modm,               xK_e     ), spawn "emoji")
     , ((modm .|. shiftMask, xK_e     ), spawn "dmenuexit.sh")
@@ -257,7 +259,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                  myDefaultLayout = tall
                                ||| magnify -- this is here just as a workaround, because the keybinding for it doesn't work...
                                ||| threeRow 
-                               ||| noBorders monocle
+                               -- ||| noBorders monocle --not needed anymore I guess as I have a proper keybinding for fullscreen
                                ||| threeColMid
 
 
