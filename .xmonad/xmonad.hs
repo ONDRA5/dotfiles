@@ -35,7 +35,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.Minimize (minimizeWindow)
 import XMonad.Actions.Promote
 import XMonad.Actions.CopyWindow (kill1, copyToAll, killAllOtherCopies, runOrCopy)
-import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
+import XMonad.Actions.CycleWS (moveTo, shiftTo, toggleWS, WSType(..), nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
 import XMonad.Actions.MouseResize
 import XMonad.Actions.Submap
 
@@ -132,7 +132,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,            xK_BackSpace), spawn "dmenufm")
     , ((modm,               xK_d     ), spawn "dmenu_run -i")
     , ((modm,               xK_o     ), spawn "dmenuduck")
-    , ((modm,               xK_Tab   ), spawn "dswitcher")
+    --, ((modm,               xK_Tab   ), spawn "dswitcher")
     -- launch XMonad prompt
     --, ((modm,               xK_d     ), shellPrompt oXPConfig)
     -- launching apps
@@ -146,6 +146,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          , ((0, xK_w),    spawn "weatherradar")
          , ((0, xK_m),    spawn "st -e neomutt")
          ])
+    -- workspace switching back and forth
+    , ((modm,               xK_Tab   ), toggleWS)
     -- window manipulation
     , ((modm .|. shiftMask, xK_q     ), kill1) -- close a window
     , ((modm,               xK_space ), sendMessage NextLayout) -- rotate layouts
