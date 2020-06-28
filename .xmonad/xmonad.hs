@@ -141,14 +141,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launching apps
     -- Submaps
     , ((modm,               xK_a     ), submap . M.fromList $
-         [ ((0, xK_q),    spawn "qutebrowser")
-         , ((0, xK_f),    spawn "firefox")
-         , ((0, xK_n),    spawn "st -e newsboat")
-         , ((0, xK_c),    spawn "st -e calcurse")
-         , ((0, xK_b),    spawn "dmenu_websearch")
-         , ((0, xK_w),    spawn "weatherradar")
-         , ((0, xK_m),    spawn "st -e neomutt")
-         , ((0, xK_t),    spawn "telegram-desktop")
+         [ ((0, xK_q),     spawn "qutebrowser")
+         , ((0, xK_f),     spawn "firefox")
+         , ((0, xK_n),     spawn "st -e newsboat")
+         , ((0, xK_c),     spawn "st -e calcurse")
+         , ((0, xK_b),     spawn "dmenu_websearch")
+         , ((0, xK_w),     spawn "weatherradar")
+         , ((0, xK_m),     spawn "st -e neomutt")
+         , ((0, xK_t),     spawn "telegram-desktop")
+         ])
+    , ((modm,               xK_p     ), submap . M.fromList $
+         [ ((0, xK_n),     spawn "playerctl next")
+         , ((0, xK_p),     spawn "playerctl previous")
+         , ((0, xK_space), spawn "playerctl play-pause")
          ])
     -- workspace switching back and forth
     , ((modm,               xK_Tab   ), toggleWS)
