@@ -32,6 +32,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
 
     -- Actions
+import qualified XMonad.Actions.Search as S
 import XMonad.Actions.Minimize (minimizeWindow)
 import XMonad.Actions.Promote
 import XMonad.Actions.CopyWindow (kill1, copyToAll, killAllOtherCopies, runOrCopy)
@@ -150,6 +151,7 @@ oXPConfig = def
    , alwaysHighlight       = True
    , maxComplRows          = Just 3 --you can set number to specify, "Just 1" for one row -- "Nothing" for unlimited
    }
+
 ------------------------------------------------------------------------
 --KEYBINDINGS
 ------------------------------------------------------------------------
@@ -166,7 +168,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_u     ), spawn "dmenuumount")
     , ((modm,            xK_BackSpace), spawn "dmenufm")
     --, ((modm,               xK_d     ), spawn "dmenu_run -i")
+    -- XMonad prompts
     , ((modm,               xK_d     ), shellPrompt oXPConfig)
+    --, ((modm,               xK_s     ), S.promptSearch oXPConfig S.google)
+    , ((modm,               xK_s     ), submap $ searchEngineMap $ S.promptSearch oXPConfig)
     , ((modm,               xK_o     ), spawn "dmenuduck")
     --, ((modm,               xK_Tab   ), spawn "dswitcher")
     -- launch XMonad prompt
@@ -232,11 +237,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
     -- mod-{backslash,y,x}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{backslash,y,x}, Move client to screen 1, 2, or 3
-    --
-
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_y, xK_x, xK_c] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
@@ -256,6 +260,28 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
+------------------------------------------------------------------------
+--SEARCH ENGINES
+------------------------------------------------------------------------
+-- Define search engines not included in the module
+archwiki, reddit, urban, wikiskripta :: S.SearchEngine
+
+archwiki    = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
+reddit      = S.searchEngine "reddit" "https://www.reddit.com/search?q="
+urban       = S.searchEngine "urban" "https://www.urbandictionary.com/define.php?term="
+wikiskripta = S.searchEngine "wikiskripta" "https://www.wikiskripta.eu/index.php?search="
+
+-- Define search engines keys, some engines here are from the module so they don't have to be defined above
+searchEngineMap method = M.fromList $
+                [ ((0, xK_a), archwiki)
+                , ((0, xK_r), reddit)
+                , ((0, xK_u), urban)
+                , ((0, xK_w), wikiskripta)
+                , ((0, xK_d), S.duckduckgo)
+                , ((0, xK_g), S.google)
+                , ((0, xK_y), S.youtube)
+                , ((0, xK_h), S.hoogle)
+                ]
 ------------------------------------------------------------------------
 ---WORKSPACES
 --should be clickable, but guess what, it doesn't work 😂
