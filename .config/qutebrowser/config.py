@@ -169,7 +169,7 @@ config.bind('gT', 'tab-prev')
 
 ## Hide the statusbar unless a message is shown.
 ## Type: Bool
-c.statusbar.hide = True
+c.statusbar.show = 'in-mode'
 
 ## Require a confirmation before quitting the application.
 ## Type: ConfirmQuit
