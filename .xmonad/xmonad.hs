@@ -80,11 +80,12 @@ windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.works
 main = do
     -- Launching two instances of xmobar on their monitors.
     xmproc0 <- spawnPipe "xmobar -x 0 /home/ondra/.config/xmobar/xmobarrc"
+    xmproc1 <- spawnPipe "xmobar -x 1 /home/ondra/.config/xmobar/xmobarrc"
        -- the xmonad
     xmonad $ewmh desktopConfig
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageHook desktopConfig <+> manageDocks
         , logHook = dynamicLogWithPP xmobarPP
-                        { ppOutput = \x -> hPutStrLn xmproc0 x 
+                        { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x
                         , ppCurrent = xmobarColor "#fb4934" "" . wrap "[" "]" -- Current workspace in xmobar
                         , ppHidden = xmobarColor "#FE8019" "" . wrap "*" ""   -- Hidden workspaces in xmobar
                         , ppHiddenNoWindows = xmobarColor "#8ec07c" ""        -- Hidden workspaces (no windows)
@@ -202,7 +203,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
 
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_backslash, xK_y, xK_x] [0..]
+        | (key, sc) <- zip [xK_y, xK_x, xK_c] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
