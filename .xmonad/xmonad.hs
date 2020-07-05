@@ -148,7 +148,7 @@ oXPConfig = def
    , showCompletionOnTab = False
    , searchPredicate       = fuzzyMatch
    , alwaysHighlight       = True
-   , maxComplRows          = Just 1 --you can set number to specify, "Just 1" for one row -- "Nothing" for unlimited
+   , maxComplRows          = Just 3 --you can set number to specify, "Just 1" for one row -- "Nothing" for unlimited
    }
 ------------------------------------------------------------------------
 --KEYBINDINGS
