@@ -195,8 +195,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --, ((modm,               xK_d     ), spawn "dmenu_run -i")
     -- XMonad prompts
     , ((modm,               xK_d     ), shellPrompt oXPConfig)
-    , ((modm,               xK_s     ), S.promptSearch sXPConfig S.google)
     --, ((modm,               xK_s     ), submap $ searchEngineMap $ S.promptSearch oXPConfig)
+    , ((modm,               xK_s     ), submap . M.fromList $
+         [ ((0, xK_g),      S.promptSearch sXPConfig S.google)
+         , ((0, xK_d),      S.promptSearch sXPConfig S.duckduckgo)
+         , ((0, xK_y),      S.promptSearch sXPConfig S.youtube)
+         , ((0, xK_h),      S.promptSearch sXPConfig S.hoogle)
+         , ((0, xK_a),      S.promptSearch sXPConfig archwiki)
+         , ((0, xK_r),      S.promptSearch sXPConfig reddit)
+         , ((0, xK_u),      S.promptSearch sXPConfig urban)
+         , ((0, xK_w),      S.promptSearch sXPConfig wikiskripta)
+         ])
     , ((modm,               xK_o     ), spawn "dmenuduck")
     --, ((modm,               xK_Tab   ), spawn "dswitcher")
     -- launch XMonad prompt
