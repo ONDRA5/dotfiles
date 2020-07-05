@@ -153,6 +153,31 @@ oXPConfig = def
    }
 
 ------------------------------------------------------------------------
+--SEARCH PROMPT
+------------------------------------------------------------------------
+sXPConfig :: XPConfig
+sXPConfig = def
+   { font                  = myFont
+   , bgColor               = "#282828"
+   , fgColor               = "#ebdbb2"
+   , bgHLight              = "#98971a"
+   , fgHLight              = "#282828"
+   , borderColor           = "#444444"
+   , promptBorderWidth     = 0
+   --, promptKeymap          = 
+   , position              = Top
+   , height                = 20
+   , historySize           = 0
+   , historyFilter         = id
+   , defaultText           = []
+   , autoComplete          = Nothing --100000 for 0.1 seconds -- "Nothing" to turn it off
+   , showCompletionOnTab = False
+   , searchPredicate       = fuzzyMatch
+   , alwaysHighlight       = True
+   , maxComplRows          = Just 1 --you can set number to specify, "Just 1" for one row -- "Nothing" for unlimited
+   }
+
+------------------------------------------------------------------------
 --KEYBINDINGS
 ------------------------------------------------------------------------
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -170,8 +195,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --, ((modm,               xK_d     ), spawn "dmenu_run -i")
     -- XMonad prompts
     , ((modm,               xK_d     ), shellPrompt oXPConfig)
-    --, ((modm,               xK_s     ), S.promptSearch oXPConfig S.google)
-    , ((modm,               xK_s     ), submap $ searchEngineMap $ S.promptSearch oXPConfig)
+    , ((modm,               xK_s     ), S.promptSearch sXPConfig S.google)
+    --, ((modm,               xK_s     ), submap $ searchEngineMap $ S.promptSearch oXPConfig)
     , ((modm,               xK_o     ), spawn "dmenuduck")
     --, ((modm,               xK_Tab   ), spawn "dswitcher")
     -- launch XMonad prompt
