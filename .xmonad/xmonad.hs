@@ -64,6 +64,12 @@ import qualified XMonad.Layout.Magnifier as Mag
     -- Keyboard stuff
 import Graphics.X11.ExtraTypes.XorgDefault
 import Graphics.X11.ExtraTypes.XF86
+
+    -- Prompt
+import XMonad.Prompt
+import XMonad.Prompt.Shell (shellPrompt)
+import XMonad.Prompt.FuzzyMatch
+
 ------------------------------------------------------------------------
 ---VARIABLES
 ------------------------------------------------------------------------
@@ -119,6 +125,31 @@ myStartupHook = do
          spawnOnce "numlockx on &"
          spawnOnce "NetworkManager &"
          spawnOnce "xsetroot -cursor_name left_ptr &" --set normal mouse cursor
+
+------------------------------------------------------------------------
+--PROMPT
+------------------------------------------------------------------------
+oXPConfig :: XPConfig
+oXPConfig = def
+   { font                  = myFont
+   , bgColor               = "#282828"
+   , fgColor               = "#ebdbb2"
+   , bgHLight              = "#98971a"
+   , fgHLight              = "#282828"
+   , borderColor           = "#444444"
+   , promptBorderWidth     = 0
+   --, promptKeymap          = 
+   , position              = Top
+   , height                = 20
+   , historySize           = 256
+   , historyFilter         = id
+   , defaultText           = []
+   , autoComplete          = Nothing --100000 for 0.1 seconds -- "Nothing" to turn it off
+   , showCompletionOnTab = False
+   , searchPredicate       = fuzzyMatch
+   , alwaysHighlight       = True
+   , maxComplRows          = Just 1 --you can set number to specify, "Just 1" for one row -- "Nothing" for unlimited
+   }
 ------------------------------------------------------------------------
 --KEYBINDINGS
 ------------------------------------------------------------------------
@@ -134,7 +165,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_m     ), spawn "dmenumount")
     , ((modm .|. shiftMask, xK_u     ), spawn "dmenuumount")
     , ((modm,            xK_BackSpace), spawn "dmenufm")
-    , ((modm,               xK_d     ), spawn "dmenu_run -i")
+    --, ((modm,               xK_d     ), spawn "dmenu_run -i")
+    , ((modm,               xK_d     ), shellPrompt oXPConfig)
     , ((modm,               xK_o     ), spawn "dmenuduck")
     --, ((modm,               xK_Tab   ), spawn "dswitcher")
     -- launch XMonad prompt
