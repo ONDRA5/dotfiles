@@ -206,7 +206,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          , ((0, xK_u),      S.promptSearch sXPConfig urban)
          , ((0, xK_w),      S.promptSearch sXPConfig wikiskripta)
          ])
-    , ((modm,               xK_o     ), spawn "dmenuduck")
     --, ((modm,               xK_Tab   ), spawn "dswitcher")
     -- launch XMonad prompt
     --, ((modm,               xK_d     ), shellPrompt oXPConfig)
