@@ -382,6 +382,6 @@ magnify    = renamed [Replace "magnify"]
              $ spacing 0
              $ ResizableTall 1 (3/100) (1/2) []
 threeColMid = renamed [Replace "threeColMid"]
-             $ limitWindows 5
+             $ limitWindows 6
              $ spacing 4
              $ ThreeColMid 1 (3/100) (1/2)
