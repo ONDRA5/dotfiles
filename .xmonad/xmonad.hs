@@ -107,7 +107,7 @@ main = do
         , modMask            = myModMask
         , terminal           = myTerminal
         , startupHook        = myStartupHook
-        , layoutHook         = myLayoutHook 
+        , layoutHook         = myLayoutHook
         , workspaces         = myWorkspaces
         , borderWidth        = myBorderWidth
         , normalBorderColor  = "#444444"
@@ -317,8 +317,8 @@ searchEngineMap method = M.fromList $
                 , ((0, xK_h), S.hoogle)
                 ]
 ------------------------------------------------------------------------
----WORKSPACES
---should be clickable, but guess what, it doesn't work 😂
+--WORKSPACES
+--the part that should make it clickable doesn't really work because xdotool doesn't play well with my special characters or I'm dumb
 ------------------------------------------------------------------------
 
 xmobarEscape = concatMap doubleLts
@@ -335,9 +335,7 @@ myWorkspaces = clickable . (map xmobarEscape)
                       let n = i ] 
 
 ------------------------------------------------------------------------
---MANAGEHOOK --This is random stuff that's basically a template 
-             --but it doesn't work 🤷
-             --placing this here to remind me to fix xdotool
+--MANAGEHOOK --to be fixed in the future
 ------------------------------------------------------------------------
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
@@ -350,7 +348,7 @@ myManageHook = composeAll
       , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ]
 ------------------------------------------------------------------------
--- LAYOUTS
+--GLOBAL LAYOUTS
 ------------------------------------------------------------------------
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats $ 
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
@@ -360,7 +358,6 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                ||| threeRow 
                                -- ||| noBorders monocle --not needed anymore I guess as I have a proper keybinding for fullscreen
                                ||| threeColMid
-
 
 tall       = renamed [Replace "tall"]
              $ limitWindows 12
