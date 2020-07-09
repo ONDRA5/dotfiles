@@ -321,6 +321,7 @@ searchEngineMap method = M.fromList $
 --the part that should make it clickable doesn't really work because xdotool doesn't play well with my special characters or I'm dumb
 ------------------------------------------------------------------------
 
+xmobarEscape :: String -> String
 xmobarEscape = concatMap doubleLts
   where
         doubleLts '<' = "<<"
@@ -332,7 +333,7 @@ myWorkspaces = clickable . (map xmobarEscape)
   where                                                                      
         clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
                       (i,ws) <- zip [1..9] l,                                        
-                      let n = i ] 
+                      let n = i ]
 
 ------------------------------------------------------------------------
 --MANAGEHOOK --to be fixed in the future
