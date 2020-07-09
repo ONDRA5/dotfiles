@@ -179,3 +179,4 @@ c.statusbar.show = 'in-mode'
 ##   - downloads: Show a confirmation if downloads are running
 ##   - never: Never show a confirmation.
 c.confirm_quit = ['downloads']
+config.bind('<Ctrl-o>', 'hint links spawn --detach mpv --force-window yes {hint-url}')
