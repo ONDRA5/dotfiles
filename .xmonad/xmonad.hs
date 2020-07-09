@@ -340,11 +340,9 @@ myWorkspaces = clickable . (map xmobarEscape)
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
      [  className =? "firefox"     --> doShift "<action=xdotool key super+1>www</action>"
-      , className =? "vlc"         --> doShift "<action=xdotool key super+8>vid</action>"
-      , title =? "Oracle VM VirtualBox Manager"  --> doFloat
-      , className =? "Oracle VM VirtualBox Manager"  --> doShift "<action=xdotool key super+5>vbox</action>"
-      , className =? "Gimp"        --> doFloat
-      , className =? "Gimp"        --> doShift "<action=xdotool key super+9>gimp</action>"
+      , className =? "mpv"         --> doShift "<action=xdotool key super+6>vid</action>"
+      , className =? "Pcmanfm"     --> doShift "<action=xdotool key super+2>file</action>"
+      , className =? "Galculator"        --> doFloat
       , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ]
 ------------------------------------------------------------------------
