@@ -498,6 +498,8 @@ key_bindings:
   #- { key: L,         mods: Control, chars: "\x0c"                            }
   - { key: PageUp,                    action: ScrollPageUp,   mode: ~Alt       }
   - { key: PageDown,                  action: ScrollPageDown, mode: ~Alt       }
+  - { key: U,          mods: Control, action: ScrollPageUp,   mode: ~Alt       }
+  - { key: D,          mods: Control, action: ScrollPageDown, mode: ~Alt       }
   #- { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
   #- { key: End,       mods: Shift,   action: ScrollToBottom, mode: ~Alt       }
 
