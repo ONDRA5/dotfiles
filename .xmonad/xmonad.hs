@@ -12,54 +12,43 @@
 import XMonad
 import XMonad.Config.Desktop
 import Data.Monoid
-import Data.Maybe (isJust)
 import System.IO (hPutStrLn)
 import System.Exit (exitSuccess)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
     -- Utilities
-import XMonad.Util.Loggers
-import XMonad.Util.Run (safeSpawn, unsafeSpawn, runInTerm, spawnPipe)
+import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.SpawnOnce
 
     -- Hooks
-import XMonad.Hooks.DynamicLog (dynamicLogWithPP, defaultPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
-import XMonad.Hooks.ManageDocks (avoidStruts, docksStartupHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers (isFullscreen, isDialog,  doFullFloat, doCenterFloat) 
-import XMonad.Hooks.Place (placeHook, withGaps, smart)
-import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
 
     -- Actions
 import qualified XMonad.Actions.Search as S
-import XMonad.Actions.Minimize (minimizeWindow)
-import XMonad.Actions.Promote
-import XMonad.Actions.CopyWindow (kill1, copyToAll, killAllOtherCopies, runOrCopy)
-import XMonad.Actions.CycleWS (moveTo, shiftTo, toggleWS, WSType(..), nextScreen, prevScreen, shiftNextScreen, shiftPrevScreen)
+import XMonad.Actions.CopyWindow (kill1, copyToAll)
+import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.MouseResize
 import XMonad.Actions.Submap
 
     -- Layouts modifiers
-import XMonad.Layout.PerWorkspace (onWorkspace) 
-import XMonad.Layout.Renamed (renamed, Rename(CutWordsLeft, Replace))
-import XMonad.Layout.WorkspaceDir
-import XMonad.Layout.Spacing (spacing) 
-import XMonad.Layout.NoBorders
-import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
-import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
-import XMonad.Layout.Reflect (reflectVert, reflectHoriz, REFLECTX(..), REFLECTY(..))
+import XMonad.Layout.Renamed (renamed, Rename(Replace))
+import XMonad.Layout.Spacing (spacing)
+--import XMonad.Layout.NoBorders
+import XMonad.Layout.LimitWindows (limitWindows)
+import XMonad.Layout.WindowArranger (windowArrange)
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), Toggle(..), (??))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
 
     -- Layouts
 import XMonad.Layout.SimplestFloat
-import XMonad.Layout.ThreeColumns
+import XMonad.Layout.ThreeColumns(ThreeCol(..))
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.ZoomRow (zoomRow, zoomIn, zoomOut, zoomReset, ZoomMessage(ZoomFullToggle))
-import XMonad.Layout.IM (withIM, Property(Role))
-import XMonad.Layout.ThreeColumns (ThreeCol(..))
+import XMonad.Layout.ZoomRow (zoomRow)
 import qualified XMonad.Layout.Magnifier as Mag
 
     -- Keyboard stuff
@@ -331,7 +320,7 @@ myWorkspaces = clickable . (map xmobarEscape)
                $ ["www", "file", "dev", "chat", "exp", "vid", "doc", "uni", "spt"]
   where                                                                      
         clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
-                      (i,ws) <- zip [1..9] l,                                        
+                      (i,ws) <- zip [1..9] l,
                       let n = i ]
 
 ------------------------------------------------------------------------
