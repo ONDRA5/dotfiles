@@ -6,7 +6,7 @@ Config {
        , bgColor         = "#282828"
        , fgColor         = "#ebdbb2"
        , position        = Top
-       , alpha           = 255
+       , alpha           = 242
 
        -- Layout
        , sepChar         = "%"
