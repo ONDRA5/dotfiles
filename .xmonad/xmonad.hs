@@ -70,6 +70,7 @@ import Graphics.X11.ExtraTypes.XF86
 import XMonad.Prompt
 import XMonad.Prompt.Shell (shellPrompt)
 import XMonad.Prompt.FuzzyMatch
+import XMonad.Prompt.AppLauncher
 
 ------------------------------------------------------------------------
 ---VARIABLES
@@ -207,8 +208,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          , ((0, xK_w),      S.promptSearch sXPConfig wikiskripta)
          ])
     --, ((modm,               xK_Tab   ), spawn "dswitcher")
-    -- launch XMonad prompt
-    --, ((modm,               xK_d     ), shellPrompt oXPConfig)
     -- launching apps
     -- Submaps
     , ((modm,               xK_a     ), submap . M.fromList $
