@@ -64,16 +64,22 @@ import XMonad.Prompt.AppLauncher
 ------------------------------------------------------------------------
 ---VARIABLES
 ------------------------------------------------------------------------
+myFont :: [Char]
 myFont          = "xft:Hack Nerd Font:size=10:antialias=true:autohint=true"
 myModMask       = mod4Mask
+myTerminal :: [Char]
 myTerminal      = "st"
+myTextEditor :: [Char]
 myTextEditor    = "nvim"
+myBorderWidth :: Dimension
 myBorderWidth   = 2
+windowCount :: X (Maybe String)
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 ------------------------------------------------------------------------
 --MAIN
 ------------------------------------------------------------------------
+main :: IO ()
 main = do
     -- Launching two instances of xmobar on their monitors.
     xmproc0 <- spawnPipe "xmobar -x 0 /home/ondra/.config/xmobar/xmobarrc"
@@ -106,6 +112,7 @@ main = do
 ------------------------------------------------------------------------
 --AUTOSTART
 ------------------------------------------------------------------------
+myStartupHook :: X ()
 myStartupHook = do
          spawnOnce "nitrogen --restore &"
          spawnOnce "picom &"
@@ -170,6 +177,7 @@ sXPConfig = def
 ------------------------------------------------------------------------
 --KEYBINDINGS
 ------------------------------------------------------------------------
+myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
@@ -268,6 +276,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
+myMouseBindings :: XConfig l -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
