@@ -193,7 +193,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --, ((modm,               xK_d     ), spawn "dmenu_run -i")
     -- XMonad prompts
     , ((modm,               xK_d     ), shellPrompt oXPConfig)
-    --, ((modm,               xK_s     ), submap $ searchEngineMap $ S.promptSearch oXPConfig)
     , ((modm,               xK_s     ), submap . M.fromList $
          [ ((0, xK_g),      S.promptSearch sXPConfig S.google)
          , ((0, xK_d),      S.promptSearch sXPConfig S.duckduckgo)
@@ -304,17 +303,6 @@ reddit      = S.searchEngine "reddit" "https://www.reddit.com/search?q="
 urban       = S.searchEngine "urban" "https://www.urbandictionary.com/define.php?term="
 wikiskripta = S.searchEngine "wikiskripta" "https://www.wikiskripta.eu/index.php?search="
 
--- Define search engines keys, some engines here are from the module so they don't have to be defined above
-searchEngineMap method = M.fromList $
-                [ ((0, xK_a), archwiki)
-                , ((0, xK_r), reddit)
-                , ((0, xK_u), urban)
-                , ((0, xK_w), wikiskripta)
-                , ((0, xK_d), S.duckduckgo)
-                , ((0, xK_g), S.google)
-                , ((0, xK_y), S.youtube)
-                , ((0, xK_h), S.hoogle)
-                ]
 ------------------------------------------------------------------------
 --WORKSPACES
 --the part that should make it clickable doesn't really work because xdotool doesn't play well with my special characters or I'm dumb
