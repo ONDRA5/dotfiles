@@ -209,13 +209,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_a     ), submap . M.fromList $
          [ ((0, xK_q),     spawn "qutebrowser")
          , ((0, xK_f),     spawn "firefox")
-         , ((0, xK_n),     spawn "st -e newsboat")
-         , ((0, xK_c),     spawn "st -e calcurse")
+         , ((0, xK_n),     spawn (myTerminal ++ " -e newsboat"))
+         , ((0, xK_c),     spawn (myTerminal ++ " -e calcurse"))
          , ((0, xK_b),     spawn "dmenu_websearch")
          , ((0, xK_w),     spawn "weatherradar")
-         , ((0, xK_m),     spawn "st -e neomutt")
+         , ((0, xK_m),     spawn (myTerminal ++ " -e neomutt"))
          , ((0, xK_t),     spawn "telegram-desktop")
-         , ((0, xK_v),     spawn "st -e vifm")
+         , ((0, xK_v),     spawn (myTerminal ++ " -e vifm"))
          ])
     , ((modm,               xK_p     ), submap . M.fromList $
          [ ((0, xK_n),     spawn "playerctl next")
