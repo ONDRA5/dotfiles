@@ -29,7 +29,7 @@ import XMonad.Hooks.EwmhDesktops
 
     -- Actions
 import qualified XMonad.Actions.Search as S
-import XMonad.Actions.CopyWindow (kill1, copyToAll)
+import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.MouseResize
 import XMonad.Actions.Submap
@@ -217,6 +217,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          ])
     -- workspace switching back and forth
     , ((modm,               xK_Tab   ), toggleWS)
+    -- magnify a window (another failed attempt)
+    --, ((modm,               xK_o     ), sendMessage (T.Toggle "magnify"))
     -- window manipulation
     , ((modm .|. shiftMask, xK_q     ), kill1) -- close a window
     , ((modm,               xK_space ), sendMessage NextLayout) -- rotate layouts
