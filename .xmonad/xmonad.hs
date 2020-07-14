@@ -216,6 +216,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          , ((0, xK_m),     spawn (myTerminal ++ " -e neomutt"))
          , ((0, xK_t),     spawn "telegram-desktop")
          , ((0, xK_v),     spawn (myTerminal ++ " -e vifm"))
+         , ((0, xK_a),     spawn (myTerminal ++ " -e pulsemixer"))
          ])
     , ((modm,               xK_p     ), submap . M.fromList $
          [ ((0, xK_n),     spawn "playerctl next")
