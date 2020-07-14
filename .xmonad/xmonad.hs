@@ -37,7 +37,7 @@ import XMonad.Actions.Submap
     -- Layouts modifiers
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
 import XMonad.Layout.Spacing (spacing)
---import XMonad.Layout.NoBorders
+import XMonad.Layout.NoBorders(smartBorders)
 import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.WindowArranger (windowArrange)
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), Toggle(..), (??))
@@ -142,7 +142,7 @@ oXPConfig = def
    , historySize           = 256
    , historyFilter         = id
    , defaultText           = []
-   , autoComplete          = Nothing --100000 for 0.1 seconds -- "Nothing" to turn it off
+   , autoComplete          = Just 100000 --100000 for 0.1 seconds -- "Nothing" to turn it off
    , showCompletionOnTab   = False
    , searchPredicate       = fuzzyMatch
    , alwaysHighlight       = True
@@ -328,6 +328,7 @@ myWorkspaces = clickable . (map xmobarEscape)
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
      [  className =? "firefox"     --> doShift "<action=xdotool key super+1>www</action>"
+      , className =? "qutebrowser" --> doShift "<action=xdotool key super+1>www</action>"
       , className =? "mpv"         --> doShift "<action=xdotool key super+6>vid</action>"
       , className =? "Pcmanfm"     --> doShift "<action=xdotool key super+2>file</action>"
       , className =? "Galculator"        --> doFloat
@@ -339,7 +340,7 @@ myManageHook = composeAll
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats $ 
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
              where 
-                 myDefaultLayout = tall
+                 myDefaultLayout = smartBorders tall
                                ||| magnify -- this is here just as a workaround, because the keybinding for it doesn't work...
                                ||| threeRow 
                                -- ||| noBorders monocle --not needed anymore I guess as I have a proper keybinding for fullscreen
