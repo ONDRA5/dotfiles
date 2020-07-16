@@ -330,8 +330,9 @@ myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
      [  className =? "firefox"     --> doShift "<action=xdotool key super+1>www</action>"
       , className =? "qutebrowser" --> doShift "<action=xdotool key super+1>www</action>"
-      , className =? "mpv"         --> doShift "<action=xdotool key super+6>vid</action>"
       , className =? "Pcmanfm"     --> doShift "<action=xdotool key super+2>file</action>"
+      , className =? "Telegram"    --> doShift "<action=xdotool key super+4>chat</action>"
+      , className =? "mpv"         --> doShift "<action=xdotool key super+6>vid</action>"
       , className =? "Galculator"        --> doFloat
       , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ]
