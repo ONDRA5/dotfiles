@@ -333,8 +333,8 @@ myManageHook = composeAll
       , className =? "Pcmanfm"     --> doShift "<action=xdotool key super+2>file</action>"
       , className =? "Telegram"    --> doShift "<action=xdotool key super+4>chat</action>"
       , className =? "mpv"         --> doShift "<action=xdotool key super+6>vid</action>"
-      , className =? "Galculator"        --> doFloat
-      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+      , className =? "Galculator"  --> doCenterFloat
+      , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
      ]
 ------------------------------------------------------------------------
 --GLOBAL LAYOUTS
