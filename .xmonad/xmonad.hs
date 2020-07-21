@@ -324,7 +324,7 @@ myWorkspaces = clickable . (map xmobarEscape)
                       let n = i ]
 
 ------------------------------------------------------------------------
---MANAGEHOOK --to be fixed in the future
+--MANAGEHOOK
 ------------------------------------------------------------------------
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
