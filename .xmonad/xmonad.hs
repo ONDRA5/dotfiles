@@ -343,7 +343,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ myDefaultLayout
              where 
                  myDefaultLayout = smartBorders tall
-                               ||| magnify -- this is here just as a workaround, because the keybinding for it doesn't work...
+                               ||| smartBorders magnify -- this is here just as a workaround, because the keybinding for it doesn't work...
                                ||| threeRow 
                                -- ||| noBorders monocle --not needed anymore I guess as I have a proper keybinding for fullscreen
                                ||| threeColMid
