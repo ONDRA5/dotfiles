@@ -327,14 +327,15 @@ myWorkspaces = clickable . (map xmobarEscape)
 --MANAGEHOOK
 ------------------------------------------------------------------------
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
-myManageHook = composeAll
-     [  className =? "firefox"     --> doShift "<action=xdotool key super+1>www</action>"
-      , className =? "qutebrowser" --> doShift "<action=xdotool key super+1>www</action>"
-      , className =? "Pcmanfm"     --> doShift "<action=xdotool key super+2>file</action>"
-      , className =? "Telegram"    --> doShift "<action=xdotool key super+4>chat</action>"
-      , className =? "mpv"         --> doShift "<action=xdotool key super+6>vid</action>"
-      , className =? "Galculator"  --> doCenterFloat
-      , (className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat  -- Float Firefox Dialog
+myManageHook = composeAll . concat $
+      [ [isDialog --> doCenterFloat]
+      , [className =? "firefox"     --> doShift "<action=xdotool key super+1>www</action>"]
+      , [className =? "qutebrowser" --> doShift "<action=xdotool key super+1>www</action>"]
+      , [className =? "Pcmanfm"     --> doShift "<action=xdotool key super+2>file</action>"]
+      , [className =? "Telegram"    --> doShift "<action=xdotool key super+4>chat</action>"]
+      , [className =? "mpv"         --> doShift "<action=xdotool key super+6>vid</action>"]
+      , [className =? "Galculator"  --> doCenterFloat]
+      , [(className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat]  -- Float Firefox Dialog
      ]
 ------------------------------------------------------------------------
 --GLOBAL LAYOUTS
