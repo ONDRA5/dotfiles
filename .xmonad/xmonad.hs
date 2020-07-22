@@ -59,7 +59,7 @@ import Graphics.X11.ExtraTypes.XF86
 import XMonad.Prompt
 import XMonad.Prompt.Shell (shellPrompt)
 import XMonad.Prompt.FuzzyMatch
-import XMonad.Prompt.AppLauncher
+import XMonad.Prompt.Pass (passPrompt)
 
 ------------------------------------------------------------------------
 ---VARIABLES
@@ -193,6 +193,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --, ((modm,               xK_d     ), spawn "dmenu_run -i")
     -- XMonad prompts
     , ((modm,               xK_d     ), shellPrompt oXPConfig)
+    , ((modm .|. shiftMask, xK_p     ), passPrompt sXPConfig)
     , ((modm,               xK_s     ), submap . M.fromList $
          [ ((0, xK_g),      S.promptSearch sXPConfig S.google)
          , ((0, xK_d),      S.promptSearch sXPConfig S.duckduckgo)
@@ -203,7 +204,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
          , ((0, xK_u),      S.promptSearch sXPConfig urban)
          , ((0, xK_w),      S.promptSearch sXPConfig wikiskripta)
          ])
-    --, ((modm,               xK_Tab   ), spawn "dswitcher")
     -- launching apps
     -- Submaps
     , ((modm,               xK_a     ), submap . M.fromList $
