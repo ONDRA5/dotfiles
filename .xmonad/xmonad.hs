@@ -123,6 +123,7 @@ myStartupHook = do
          spawnOnce "numlockx on &"
          spawnOnce "NetworkManager &"
          spawnOnce "xsetroot -cursor_name left_ptr &" --set normal mouse cursor
+         spawnOnce "pulse_volume.py | xob"
 
 ------------------------------------------------------------------------
 --PROMPT
