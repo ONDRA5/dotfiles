@@ -308,6 +308,7 @@ wikiskripta = S.searchEngine "wikiskripta" "https://www.wikiskripta.eu/index.php
 ------------------------------------------------------------------------
 --WORKSPACES
 --the part that should make it clickable doesn't really work because xdotool doesn't play well with my special characters or I'm dumb
+--THIS WILL SOON BR OBSOLOTE AS THERE'S A MODULE FOR IT IN THE WORKS (WILL BE A PP)
 ------------------------------------------------------------------------
 
 xmobarEscape :: String -> String
