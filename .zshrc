@@ -47,6 +47,7 @@ SPACESHIP_KUBECONTEXT_SHOW=false
 SPACESHIP_TERRAFORM_SHOW=false
 SPACESHIP_VI_MODE_SHOW=true
 SPACESHIP_JOBS_SHOW=true
+SPACESHIP_VI_MODE_SHOW=false
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
