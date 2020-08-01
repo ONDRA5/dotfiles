@@ -151,6 +151,7 @@ export TERMINAL='st'
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
+bindkey "^?" backward-delete-char
 
 # Edit line in vim buffer ctrl-v
 autoload edit-command-line; zle -N edit-command-line
