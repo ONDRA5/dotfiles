@@ -36,6 +36,9 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
+" COC configuration
+source $HOME/.config/nvim/plug-config/coc.vim
+
 " Theme and airline
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
@@ -113,6 +116,11 @@ set cursorcolumn
 " j/k will navigate wrapped lines as normal lines
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : j)
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : k)
+
+" tab will switch buffers
+nnoremap <silent> <TAB> :tabn<CR>
+" SHIFT-TAB will go back
+nnoremap <silent> <S-TAB> :tabp<CR>
 
 " numbered lines
 set number
