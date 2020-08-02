@@ -1,0 +1,34 @@
+{
+	"suggest.completionItemKindLabels": {
+		"text": "t",
+		"method": "m",
+		"function": ""
+	},
+	"pairs.enableCharacters": [
+		"(",
+		"[",
+		"{",
+		"'",
+		"\"",
+		"`"
+	],
+	"coc.preferences.formatOnSaveFiletypes": [
+		"css",
+		"markdown",
+		"javascript",
+		"graphql",
+		"html",
+		"yaml",
+		"json",
+		"python",
+		"vim",
+		"sh"
+	],
+	// python config
+	"python.linting.enabled": true,
+	"python.linting.pylintEnabled": true,
+	"snippets.ultisnips.directories": [
+		"UltiSnips",
+		"~/.config/nvim/utils/snips"
+	]
+}
