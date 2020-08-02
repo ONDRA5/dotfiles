@@ -18,10 +18,13 @@ call plug#begin('~/vim/plugged')
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'dkasak/gruvbox'
 Plug 'vim-airline/vim-airline'
+" Git
+Plug 'airblade/vim-gitgutter'
 " Center text
 Plug 'junegunn/goyo.vim'
 " Code completetion
 Plug 'neoclide/coc.nvim',{'branch': 'release'}
+Plug 'honza/vim-snippets'
 " Working with tags
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
@@ -160,3 +163,13 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" Git Gutter
+  highlight GitGutterAdd guifg=#98971A ctermfg=Green
+  highlight GitGutterChange guifg=#FABD2F ctermfg=Yellow
+  highlight GitGutterDelete guifg=#CC241D ctermfg=Red
+  nmap ) <Plug>(GitGutterNextHunk)
+  nmap ( <Plug>(GitGutterPrevHunk)
+  let g:gitgutter_enabled = 1
+  let g:gitgutter_map_keys = 0
+  let g:gitgutter_highlight_linenrs = 1
