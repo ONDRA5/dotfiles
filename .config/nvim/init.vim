@@ -122,6 +122,12 @@ nnoremap <silent> <TAB> :tabn<CR>
 " SHIFT-TAB will go back
 nnoremap <silent> <S-TAB> :tabp<CR>
 
+" space for :e
+noremap <silent> <SPACE> :e
+
+" Ctr-t for new tab
+noremap <silent> <C-t> :tab sp<CR>
+
 " numbered lines
 set number
 
