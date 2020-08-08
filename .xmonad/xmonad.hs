@@ -35,6 +35,7 @@ import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.MouseResize
 import XMonad.Actions.Submap
+import XMonad.Actions.WindowGo
 
     -- Layouts modifiers
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
@@ -210,8 +211,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launching apps
     -- Submaps
     , ((modm,               xK_a     ), submap . M.fromList $
-         [ ((0, xK_q),     spawn "qutebrowser")
-         , ((0, xK_f),     spawn "firefox")
+         [ ((0, xK_q),     runOrRaise "qutebrowser" (className =? "qutebrowser"))
+         , ((0, xK_f),     runOrRaise "firefox" (className =? "firefox"))
          , ((0, xK_n),     spawn (myTerminal ++ " -e newsboat"))
          , ((0, xK_c),     spawn (myTerminal ++ " -e calcurse"))
          , ((0, xK_b),     spawn "dmenu_websearch")
@@ -333,12 +334,13 @@ myWorkspaces = clickable . (map xmobarEscape)
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll . concat $
       [ [isDialog --> doCenterFloat]
-      , [className =? "firefox"     --> doShift "<action=xdotool key super+1>www</action>"]
-      , [className =? "qutebrowser" --> doShift "<action=xdotool key super+1>www</action>"]
-      , [className =? "Pcmanfm"     --> doShift "<action=xdotool key super+2>file</action>"]
-      , [className =? "Telegram"    --> doShift "<action=xdotool key super+4>chat</action>"]
-      , [className =? "mpv"         --> doShift "<action=xdotool key super+6>vid</action>"]
-      , [className =? "Galculator"  --> doCenterFloat]
+      , [className =? "firefox"       --> doShift "<action=xdotool key super+1>www</action>"]
+      , [className =? "qutebrowser"   --> doShift "<action=xdotool key super+1>www</action>"]
+      , [className =? "Brave-browser" --> doShift "<action=xdotool key super+1>www</action>"]
+      , [className =? "Pcmanfm"       --> doShift "<action=xdotool key super+2>file</action>"]
+      , [className =? "Telegram"      --> doShift "<action=xdotool key super+4>chat</action>"]
+      , [className =? "mpv"           --> doShift "<action=xdotool key super+6>vid</action>"]
+      , [className =? "Galculator"    --> doCenterFloat]
       , [(className =? "firefox" <&&> resource =? "Dialog") --> doCenterFloat]  -- Float Firefox Dialog
      ]
 ------------------------------------------------------------------------
