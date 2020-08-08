@@ -30,6 +30,7 @@ import XMonad.Hooks.EwmhDesktops
     -- Actions
 import qualified XMonad.Actions.Search as S
 import qualified XMonad.Actions.FlexibleResize as Flex
+import XMonad.Actions.UpdatePointer
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.MouseResize
@@ -98,7 +99,7 @@ main = do
                         , ppUrgent = xmobarColor "#cc241d" "" . wrap "!" "!"  -- Urgent workspace
                         , ppExtras  = [windowCount]                           -- # of windows current workspace
                         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-                        }
+                        } >> updatePointer (0.5, 0.5) (0, 0)
         , keys               = myKeys
         , mouseBindings      = myMouseBindings
         , modMask            = myModMask
