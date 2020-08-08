@@ -65,10 +65,10 @@ import XMonad.Prompt.Pass (passPrompt)
 ---VARIABLES
 ------------------------------------------------------------------------
 myFont :: [Char]
-myFont          = "xft:Hack Nerd Font:size=10:antialias=true:autohint=true"
+myFont          = "xft:Mononoki Nerd Font:size=11:antialias=true:autohint=true"
 myModMask       = mod4Mask
 myTerminal :: [Char]
-myTerminal      = "st"
+myTerminal      = "alacritty"
 myTextEditor :: [Char]
 myTextEditor    = "nvim"
 myBorderWidth :: Dimension
