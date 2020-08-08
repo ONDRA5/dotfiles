@@ -29,6 +29,7 @@ import XMonad.Hooks.EwmhDesktops
 
     -- Actions
 import qualified XMonad.Actions.Search as S
+import qualified XMonad.Actions.FlexibleResize as Flex
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.MouseResize
@@ -288,7 +289,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
 
     -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
+    , ((modm, button3), (\w -> focus w >> Flex.mouseResizeWindow w
                                        >> windows W.shiftMaster))
 
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
