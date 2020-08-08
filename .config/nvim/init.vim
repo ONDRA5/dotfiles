@@ -13,6 +13,7 @@ call plug#begin('~/vim/plugged')
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'dkasak/gruvbox'
 Plug 'vim-airline/vim-airline'
+Plug 'neovimhaskell/haskell-vim'
 " Miscellanous
 Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
@@ -65,3 +66,13 @@ let g:Hexokinase_optInPatterns = [
 let g:Hexokinase_highlighters = ['backgroundfull']
  " Reenable hexokinase on enter
  autocmd VimEnter * HexokinaseTurnOn
+
+" Haskell
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+" let g:haskell_classic_highlighting = 1   " to disable opinionated highlighting
