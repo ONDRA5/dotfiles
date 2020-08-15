@@ -68,7 +68,7 @@ import XMonad.Prompt.Pass (passPrompt)
 ---VARIABLES
 ------------------------------------------------------------------------
 myFont :: [Char]
-myFont          = "xft:Mononoki Nerd Font:size=11:antialias=true:autohint=true"
+myFont          = "xft:Mononoki Nerd Font:size=12:antialias=true:autohint=true"
 myModMask       = mod4Mask
 myTerminal :: [Char]
 myTerminal      = "alacritty"
@@ -120,7 +120,8 @@ myStartupHook = do
          spawnOnce "nitrogen --restore &"
          spawnOnce "picom &"
          spawnOnce "start-pulseaudio-x11 &"
-         spawnOnce "lxqt-policykit-agent &"
+         --spawnOnce "lxqt-policykit-agent &"
+         spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
          spawnOnce "dunst &"
          spawnOnce "playerctl &"
          spawnOnce "numlockx on &"
@@ -190,7 +191,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_f     ), sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts)
     -- dmenu stuff
     , ((modm,               xK_e     ), spawn "emoji")
-    , ((modm .|. shiftMask, xK_e     ), spawn "dmenuexit.sh")
+    --, ((modm .|. shiftMask, xK_e     ), spawn "dmenuexit.sh")
+    , ((modm .|. shiftMask, xK_e     ), spawn "arcolinux-logout")
     , ((modm .|. shiftMask, xK_m     ), spawn "dmenumount")
     , ((modm .|. shiftMask, xK_u     ), spawn "dmenuumount")
     , ((modm,            xK_BackSpace), spawn "dmenufm")
@@ -252,8 +254,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0 , xF86XK_AudioRaiseVolume  ), spawn "amixer -q -D pulse sset Master 5%+")
     , ((0 , xF86XK_AudioMute         ), spawn "amixer -q -D pulse sset Master toggle")
     , ((0 , xF86XK_TouchpadToggle    ), spawn "(synclient | grep 'Touchpad0ff.*1' && synclient Touchpad0ff=0) || synclient Touchpad0ff=1")
-    , ((0 , xF86XK_MonBrightnessDown ), spawn "xbacklight -inc 10")
-    , ((0 , xF86XK_MonBrightnessUp   ), spawn "xbacklight -dec 10")
+    --, ((0 , xF86XK_MonBrightnessDown ), spawn "xbacklight -dec 10")  --for intel
+    --, ((0 , xF86XK_MonBrightnessUp   ), spawn "xbacklight -inc 10")  --for intel
+    , ((0 , xF86XK_MonBrightnessDown ), spawn "brightnessctl set 10%-")
+    , ((0 , xF86XK_MonBrightnessUp   ), spawn "brightnessctl set 10%+")
     , ((modm, xF86XK_AudioMute       ), spawn "playerctl previous")
     , ((modm, xF86XK_AudioLowerVolume), spawn "playerctl play-pause")
     , ((modm, xF86XK_AudioRaiseVolume), spawn "playerctl next")
