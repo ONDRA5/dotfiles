@@ -1,7 +1,7 @@
 Config { 
         
        -- Appearance
-         font    = "xft:Mononoki Nerd Font:size=9.5:antiaias=true:autohint=true"
+         font    = "xft:Mononoki Nerd Font:size=12.0:antiaias=true:autohint=true"
        , additionalFonts = [ "xft:FontAwesome:pixelsize=10" ]
        , bgColor         = "#282828"
        , fgColor         = "#ebdbb2"
