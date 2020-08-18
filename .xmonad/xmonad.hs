@@ -234,7 +234,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- magnify a window (another failed attempt)
     --, ((modm,               xK_o     ), sendMessage (T.Toggle "magnify"))
     -- window manipulation
-    , ((modm .|. shiftMask, xK_q     ), kill1) -- close a window
+    , ((modm,               xK_q     ), kill1) -- close a window
     , ((modm,               xK_space ), sendMessage NextLayout) -- rotate layouts
     , ((modm .|. shiftMask, xK_space ), sendMessage FirstLayout) -- default layout
     , ((modm,               xK_n     ), refresh) -- resize viewed windows to the correct size
