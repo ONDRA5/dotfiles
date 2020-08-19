@@ -119,7 +119,7 @@ myStartupHook :: X ()
 myStartupHook = do
          spawnOnce "nitrogen --restore &"
          spawnOnce "picom &"
-         spawnOnce "start-pulseaudio-x11 &"
+         --spawnOnce "start-pulseaudio-x11 &"
          --spawnOnce "lxqt-policykit-agent &"
          spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
          spawnOnce "dunst &"
