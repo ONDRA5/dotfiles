@@ -128,6 +128,7 @@ myStartupHook = do
          spawnOnce "NetworkManager &"
          spawnOnce "xsetroot -cursor_name left_ptr &" --set normal mouse cursor
          spawnOnce "pulse_volume.py | xob"
+         spawnOnce "xrdb ~/.Xresources"
 
 ------------------------------------------------------------------------
 --PROMPT
@@ -197,6 +198,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_u     ), spawn "dmenuumount")
     , ((modm,            xK_BackSpace), spawn "dmenufm")
     --, ((modm,               xK_d     ), spawn "dmenu_run -i")
+    -- Xmenu
+    , ((modm .|. shiftMask, xK_a     ), spawn "$HOME/xmenu/./xmenu.sh")
     -- XMonad prompts
     , ((modm,               xK_d     ), shellPrompt oXPConfig)
     , ((modm .|. shiftMask, xK_p     ), passPrompt sXPConfig)
