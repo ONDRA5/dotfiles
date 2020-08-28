@@ -261,6 +261,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --, ((0 , xF86XK_MonBrightnessUp   ), spawn "xbacklight -inc 10")  --for intel
     , ((0 , xF86XK_MonBrightnessDown ), spawn "brightnessctl set 10%-")
     , ((0 , xF86XK_MonBrightnessUp   ), spawn "brightnessctl set 10%+")
+    , ((0 , xF86XK_Favorites         ), spawn "touchpadtoggleX")
     , ((modm, xF86XK_AudioMute       ), spawn "playerctl previous")
     , ((modm, xF86XK_AudioLowerVolume), spawn "playerctl play-pause")
     , ((modm, xF86XK_AudioRaiseVolume), spawn "playerctl next")
