@@ -121,6 +121,7 @@ export ARCHFLAGS="-arch x86_64"
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+alias cat="bat"
 alias ls="lsd -hA --group-dirs first"
 alias l="lsd -hA1 --group-dirs first"
 alias v="nvim"
