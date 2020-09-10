@@ -18,7 +18,12 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu rofi -show drun -config ~/.config/rofi/slate.rasi
+
+#FZF menu
+for_window [app_id="Alacritty" title="launcher"] floating enable, sticky enable, opacity 0.95
+set $fzfmenu alacritty -d 50 30 -t launcher -e "$HOME/.local/bin/fmenu"
+set $menu $fzfmenu
+#set $menu rofi -show drun -config ~/.config/rofi/slate.rasi
 
 ### Output configuration
 #
@@ -73,7 +78,7 @@ assign [app_id="mpv"] 6
 
 # Autostart
 exec mako
-#exec pulse_volume.py | wob
+exec pulse_volume.py | xob
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
