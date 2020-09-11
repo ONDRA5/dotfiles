@@ -20,10 +20,12 @@ set $term alacritty
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
 #FZF menu
-for_window [app_id="Alacritty" title="launcher"] floating enable, sticky enable, opacity 0.95
-set $fzfmenu alacritty -d 50 30 -t launcher -e "$HOME/.local/bin/fmenu"
-set $menu $fzfmenu
+#for_window [app_id="Alacritty" title="launcher"] floating enable, sticky enable, opacity 0.95
+#set $fzfmenu alacritty -d 50 30 -t launcher -e "$HOME/.local/bin/fmenu"
+#set $menu $fzfmenu
 #set $menu rofi -show drun -config ~/.config/rofi/slate.rasi
+set $bemenu bemenu-run -i -l 20 --prefix=run -fn Mononoki Nerd Font 13 -H 30 --tb=#1d2021 --tf=#98971a --fb=#1d2021 --ff=#98971a --nb=#1d2021 --nf=#ebdbb2 --hf=#98971a #the font doesn't get set fot some reason
+set $menu $bemenu
 
 ### Output configuration
 #
@@ -39,20 +41,15 @@ output * bg ~/Pictures/Wallpapers/wall_secondary.png fill
 
 ### Idle configuration
 #
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+ exec swayidle -w \
+          timeout 600 'swaylock -f -c 1d2021' \
+          timeout 700 'systemctl suspend' resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock -f -c 1d2021'
+# Dont idle on windows that are full screen
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle full
 
 ### Input configuration
-#
-# Example configuration:
 #
    input "2:14:ETPS/2_Elantech_Touchpad" {
        dwt enabled
@@ -64,6 +61,7 @@ output * bg ~/Pictures/Wallpapers/wall_secondary.png fill
        xkb_layout "cz"
    }
 
+#Borders and stuff
 smart_gaps on
 gaps outer 8
 gaps inner 10
@@ -86,9 +84,9 @@ exec pulse_volume.py | xob
 ### Key bindings
 
 bindsym XF86Favorites exec swaymsg input "2:14:ETPS/2_Elantech_Touchpad" events toggle enabled disabled
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
