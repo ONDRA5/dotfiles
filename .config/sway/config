@@ -1,5 +1,6 @@
 # Default config for sway
 #
+font pango:MononokiNerdFont 13px
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
@@ -24,7 +25,7 @@ set $term alacritty
 #set $fzfmenu alacritty -d 50 30 -t launcher -e "$HOME/.local/bin/fmenu"
 #set $menu $fzfmenu
 #set $menu rofi -show drun -config ~/.config/rofi/slate.rasi
-set $bemenu bemenu-run -i -l 20 --prefix=run -fn Mononoki Nerd Font 13 -H 30 --tb=#1d2021 --tf=#98971a --fb=#1d2021 --ff=#98971a --nb=#1d2021 --nf=#ebdbb2 --hf=#98971a #the font doesn't get set fot some reason
+set $bemenu bemenu-run -i --prefix=run -H 31 --fn "Mononoki Nerd Font" 13 --tb=#444444 --tf=#ebdbb2 --fb=#262627 --ff=#ebdbb2 --nb=#262627 --nf=#ebdbb2 --hf=#ebdbb2 --hb=#444444
 set $menu $bemenu
 
 ### Output configuration
@@ -42,9 +43,9 @@ output * bg ~/Pictures/Wallpapers/wall_secondary.png fill
 ### Idle configuration
 #
  exec swayidle -w \
-          timeout 600 'swaylock -f -c 1d2021' \
+          timeout 600 'swaylock -f -i ~/Pictures/Wallpapers/wall_secondary_lock.png' \
           timeout 700 'systemctl suspend' resume 'swaymsg "output * dpms on"' \
-          before-sleep 'swaylock -f -c 1d2021'
+          before-sleep 'swaylock -f -i ~/Pictures/Wallpapers/wall_secondary_lock.png'
 # Dont idle on windows that are full screen
 for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle full
@@ -66,17 +67,21 @@ smart_gaps on
 gaps outer 8
 gaps inner 10
 default_border pixel 3
+smart_borders on
 
 #Open programs on specific workspaces
 assign [class="firefox"] 1
 assign [instance="vscodium"] 3
-assign [app_id="telegram*"] 4
+assign [instance="telegram*"] 4
 assign [class="Skype"] 4
 assign [app_id="mpv"] 6
+assign [app_id="video"] 6
 
 # Autostart
 exec mako
-exec pulse_volume.py | xob
+exec gammastep -l geoclue2
+exec autotiling
+exec fusuma -d
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -96,7 +101,7 @@ bindsym Shift+Print exec grim -t jpeg -g "$(slurp)" ~/Pictures/screenshots/$(dat
 #SubMaps
 mode "launch" {
     bindsym t exec telegram-desktop; mode "default"
-    bindsym n exec $term -e newsboat; mode "default"
+    bindsym n exec $term --class video -e newsboat; mode "default"
     bindsym f exec firefox; mode "default"
     bindsym c exec gnome-calendar; mode "default"
     bindsym w exec weatherradar; mode "default"
@@ -113,6 +118,16 @@ mode "media" {
     bindsym Escape mode "default"
     }
 bindsym $mod+p mode "media" 
+
+mode "exit" {
+    bindsym s exec shutdown now
+    bindsym r exec reboot
+    bindsym l exec swaymsg exit
+    bindsym u exec systemctl suspend
+    bindsym o exec swaylock -f -i ~/Pictures/Wallpapers/wall_secondary_lock.png
+    bindsym Escape mode "default"
+}
+bindsym $mod+shift+e mode "exit"
 #
 # Basics:
 #
@@ -137,10 +152,12 @@ bindsym $mod+p mode "media"
 
     # Exit sway (logs you out of your Wayland session)
     #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-    bindsym $mod+Shift+e exec arcolinux-logout
+    #bindsym $mod+Shift+e exec arcolinux-logout
 #
 # Moving around:
 #
+    # Workspace back and forth
+    bindsym $mod+Tab workspace back_and_forth
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -165,28 +182,27 @@ bindsym $mod+p mode "media"
 #
 # Workspaces:
 #
+
     # Switch to workspace
-    bindsym $mod+plus workspace number 1
-    bindsym $mod+ecaron workspace number 2
-    bindsym $mod+scaron workspace number 3
-    bindsym $mod+ccaron workspace number 4
-    bindsym $mod+rcaron workspace number 5
-    bindsym $mod+zcaron workspace number 6
-    bindsym $mod+yacute workspace number 7
-    bindsym $mod+aacute workspace number 8
-    bindsym $mod+iacute workspace number 9
-    bindsym $mod+eacute workspace number 10
+    bindsym $mod+plus workspace 1
+    bindsym $mod+ecaron workspace 2
+    bindsym $mod+scaron workspace 3
+    bindsym $mod+ccaron workspace 4
+    bindsym $mod+rcaron workspace 5
+    bindsym $mod+zcaron workspace 6
+    bindsym $mod+yacute workspace 7
+    bindsym $mod+aacute workspace 8
+    bindsym $mod+iacute workspace 9
     # Move focused container to workspace
-    bindsym $mod+Shift+plus move container to workspace number 1
-    bindsym $mod+Shift+ecaron move container to workspace number 2
-    bindsym $mod+Shift+scaron move container to workspace number 3
-    bindsym $mod+Shift+ccaron move container to workspace number 4
-    bindsym $mod+Shift+rcaron move container to workspace number 5
-    bindsym $mod+Shift+zcaron move container to workspace number 6
-    bindsym $mod+Shift+yacute move container to workspace number 7
-    bindsym $mod+Shift+aacute move container to workspace number 8
-    bindsym $mod+Shift+iacute move container to workspace number 9
-    bindsym $mod+Shift+eacute move container to workspace number 10
+    bindsym $mod+Shift+plus move container to workspace 1
+    bindsym $mod+Shift+ecaron move container to workspace 2
+    bindsym $mod+Shift+scaron move container to workspace 3
+    bindsym $mod+Shift+ccaron move container to workspace 4
+    bindsym $mod+Shift+rcaron move container to workspace 5
+    bindsym $mod+Shift+zcaron move container to workspace 6
+    bindsym $mod+Shift+yacute move container to workspace 7
+    bindsym $mod+Shift+aacute move container to workspace 8
+    bindsym $mod+Shift+iacute move container to workspace 9
     # Note: workspaces 0can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
