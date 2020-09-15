@@ -2,6 +2,7 @@
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
 PATH=$PATH:/home/ondra/.local/bin/
 PATH=$PATH:/home/ondra/.emacs.d/bin/
+PATH=$PATH:/home/ondra/.gem/ruby/2.7.0/bin/
 #export PATH=/home/ondra/.local/bin/
 
 # Path to your oh-my-zsh installation.
@@ -122,8 +123,8 @@ export ARCHFLAGS="-arch x86_64"
 # For a full list of active aliases, run `alias`.
 #
 alias cat="bat"
-alias ls="lsd -hA --group-dirs first"
-alias l="lsd -hA1 --group-dirs first"
+alias ls="exa -ha --group-directories-first"
+alias l="exa -hla --git --group-directories-first"
 alias v="nvim"
 alias vim="nvim"
 alias cp="cp -i"
@@ -145,7 +146,7 @@ alias aur="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 #alias libreoffice="devour libreoffice"
 #alias sxiv="devour sxiv"
 
-[[ -z $DISPLAY && XDG_VTNR -eq 1 ]] && exec startx
+#[[ -z $DISPLAY && XDG_VTNR -eq 1 ]] && exec startx
 
 export TERMINAL='st'
 
