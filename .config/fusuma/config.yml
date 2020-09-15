@@ -1,0 +1,9 @@
+swipe:
+  3:
+    left:
+      command: 'swaymsg workspace next_on_output'
+    right:
+      command: 'swaymsg workspace prev_on_output'
+
+interval: 
+  swipe: 0.75
