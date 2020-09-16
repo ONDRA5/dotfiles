@@ -1,0 +1,245 @@
+* {
+    border: none;
+    border-radius: 0;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: "Font Awesome", Mononoki Nerd Font;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #262627;
+    border-bottom: 3px solid #444444;
+    color: #ebdbb2;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #ebdbb2;
+    border-bottom: 3px solid transparent;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inherit;
+    border-bottom: 3px solid #ebdbb2;
+}
+
+#workspaces button.focused {
+    background-color: #444444;
+    border-bottom: 3px solid #ebdbb2;
+}
+
+#workspaces button.urgent {
+    background-color: #cc241d;
+}
+
+#workspaces button.persistent {
+    border-bottom: 3px solid #444444;
+}
+
+#workspaces button.current_output {
+    border-bottom: 3px solid #ebdbb2;
+}
+
+#mode {
+    background-color: #444444;
+    border-bottom: 3px solid #ebdbb2;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd {
+    padding: 0 10px;
+    margin: 0 4px;
+    color: #ffffff;
+    border-bottom: 3px solid #444444;
+}
+
+#clock {
+    color: #ebdbb2;
+    background-color: #504945;
+    border-bottom: 3px solid #444444;
+}
+
+#battery {
+    background-color: #7c6f64;
+    color: #ebdbb2;
+    border-bottom: 3px solid #444444;
+}
+
+#battery.charging {
+    color: #1d2021;
+    background-color: #b8bb26;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #cc241d;
+    color: #ebdbb2;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+    background-color: #9ec07c;
+    color: #1d2021;
+    border-bottom: 3px solid #444444;
+}
+
+#memory {
+    background-color: #d3869b;
+    border-bottom: 3px solid #444444;
+}
+
+#backlight {
+    color: #1d2021;
+    background-color: #ebdbb2;
+    border-bottom: 3px solid #444444;
+}
+
+#network {
+    color: #1d2021;
+    background-color: #83a598;
+    border-bottom: 3px solid #444444;
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#pulseaudio {
+    background-color: #fabd2f;
+    color: #1d2021;
+    border-bottom: 3px solid #444444;
+}
+
+#pulseaudio.muted {
+    background-color: #90b1b1;
+    color: #2a5c45;
+}
+
+#custom-media {
+    background-color: #689d6a;
+    color: #1d2021;
+    min-width: 100px;
+    border-bottom: 3px solid #444444;
+}
+
+#custom-media.custom-spotify {
+    background-color: #689d6a;
+}
+
+#custom-media.custom-vlc {
+    background-color: #ffa000;
+}
+
+#custom-play {
+    background-color: #66cc99;
+    color: #2a5c45;
+    border-bottom: 3px solid #444444;
+}
+
+#custom-next {
+    background-color: #66cc99;
+    color: #2a5c45;
+    border-bottom: 3px solid #444444;
+}
+
+#custom-prev {
+    background-color: #66cc99;
+    color: #2a5c45;
+    border-bottom: 3px solid #444444;
+}
+
+#temperature {
+    color: #1d2021;
+    background-color: #fe8019;
+    border-bottom: 3px solid #444444;
+}
+
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
+#tray {
+    background-color: #3c3836;
+    border-bottom: 3px solid #444444;
+}
+
+#idle_inhibitor {
+    color: #1d2021;
+    background-color: #b8bb26;
+    border-bottom: 3px solid #444444;
+}
+
+#idle_inhibitor.activated {
+    color: #1d2021;
+    background-color: #fbf1c7;
+}
+
+#mpd {
+    background-color: #66cc99;
+    color: #2a5c45;
+}
+
+#mpd.disconnected {
+    background-color: #f53c3c;
+}
+
+#mpd.stopped {
+    background-color: #90b1b1;
+}
+
+#mpd.paused {
+    background-color: #51a37a;
+}
