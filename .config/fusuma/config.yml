@@ -4,6 +4,12 @@ swipe:
       command: 'swaymsg workspace next_on_output'
     right:
       command: 'swaymsg workspace prev_on_output'
-
+    up:
+      command: 'swaymsg exec nwggrid'
+    down:
+      command: 'swaymsg kill'
+  4:
+    up: 
+      command: 'swaymsg fullscreen'
 interval: 
   swipe: 0.75
