@@ -60,6 +60,8 @@ for_window [app_id="^.*"] inhibit_idle full
    }
    input * {
        xkb_layout "cz"
+       #xkb_variant "dvorak"
+       xkb_options "grp:shift_alt_toggle"
    }
 
 #Borders and stuff
@@ -82,6 +84,7 @@ exec mako
 exec gammastep -l geoclue2
 exec autotiling
 exec fusuma -d
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -123,8 +126,8 @@ mode "exit" {
     bindsym s exec shutdown now
     bindsym r exec reboot
     bindsym l exec swaymsg exit
-    bindsym u exec systemctl suspend
-    bindsym o exec swaylock -f -i ~/Pictures/Wallpapers/wall_secondary_lock.png
+    bindsym u exec systemctl suspend; mode "default"
+    bindsym o exec swaylock -f -i ~/Pictures/Wallpapers/wall_secondary_lock.png; mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+shift+e mode "exit"
