@@ -1,10 +1,17 @@
 runtime! archlinux.vim
+source ~/.config/nvim/plugconfig/coc.vim
 
 "use system clipboard
 set clipboard+=unnamedplus
 
 " Vertically center document when entering the insert mode
 autocmd InsertEnter * norm zz
+
+" Fix splits
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
 
 "Plugins
 call plug#begin('~/vim/plugged')
@@ -16,6 +23,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'neovimhaskell/haskell-vim'
 " Miscellanous
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " nvim settings
