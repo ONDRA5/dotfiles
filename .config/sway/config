@@ -24,9 +24,9 @@ set $term alacritty
 #for_window [app_id="Alacritty" title="launcher"] floating enable, sticky enable, opacity 0.95
 #set $fzfmenu alacritty -d 50 30 -t launcher -e "$HOME/.local/bin/fmenu"
 #set $menu $fzfmenu
-#set $menu rofi -show drun -config ~/.config/rofi/slate.rasi
-set $bemenu bemenu-run -i --prefix=run -H 31 --fn "Mononoki Nerd Font" 13 --tb=#444444 --tf=#ebdbb2 --fb=#262627 --ff=#ebdbb2 --nb=#262627 --nf=#ebdbb2 --hf=#ebdbb2 --hb=#444444
-set $menu $bemenu
+#set $menu rofi -show drun -config ~/.config/rofi/sidebar.rasi
+#set $bemenu bemenu-run -i --prefix=run -H 31 --fn "Mononoki Nerd Font" 13 --tb=#444444 --tf=#ebdbb2 --fb=#262627 --ff=#ebdbb2 --nb=#262627 --nf=#ebdbb2 --hf=#ebdbb2 --hb=#444444
+#set $menu $bemenu
 
 ### Output configuration
 #
@@ -62,6 +62,7 @@ for_window [app_id="^.*"] inhibit_idle full
        xkb_layout "cz"
        #xkb_variant "dvorak"
        xkb_options "grp:shift_alt_toggle"
+       xkb_options "caps:escape_shifted_capslock"
    }
 
 #Borders and stuff
@@ -73,11 +74,19 @@ smart_borders on
 
 #Open programs on specific workspaces
 assign [class="firefox"] 1
-assign [instance="vscodium"] 3
+assign [class="Brave"] 1
 assign [instance="telegram*"] 4
+assign [class="telegram*"] 4
+assign [app_id="telegram*"] 4
 assign [class="Skype"] 4
+assign [class="discord"] 4
+assign [class="Steam"] 5
+assign [instance="Steam"] 5
+assign [title="Steam"] 5
+assign [title="Lutris"] 5
 assign [app_id="mpv"] 6
 assign [app_id="video"] 6
+for_window [class="Spotify"] move to workspace 9
 
 # Autostart
 exec mako
@@ -95,17 +104,18 @@ bindsym XF86Favorites exec swaymsg input "2:14:ETPS/2_Elantech_Touchpad" events 
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym --no-repeat XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym Print exec grim -t jpeg ~/Pictures/screenshots/$(date +%d_%b_%H:%M ).jpg
-bindsym Shift+Print exec grim -t jpeg -g "$(slurp)" ~/Pictures/screenshots/$(date +%d_%b_%H:%M ).jpg
+bindsym --no-repeat Print exec grim -t jpeg ~/Pictures/screenshots/$(date +%d_%b_%H:%M ).jpg
+bindsym --no-repeat Shift+Print exec grim -t jpeg -g "$(slurp)" ~/Pictures/screenshots/$(date +%d_%b_%H:%M ).jpg
 
 #SubMaps
 mode "launch" {
     bindsym t exec telegram-desktop; mode "default"
     bindsym n exec $term --class video -e newsboat; mode "default"
     bindsym f exec firefox; mode "default"
+    bindsym b exec brave; mode "default"
     bindsym c exec gnome-calendar; mode "default"
     bindsym w exec weatherradar; mode "default"
     bindsym m exec geary; mode "default"
@@ -135,13 +145,22 @@ bindsym $mod+shift+e mode "exit"
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym --no-repeat $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+q kill
+    bindsym --no-repeat $mod+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    set $menu killall wofi || wofi
+    bindsym --no-repeat $mod+d exec $menu
+
+    # Pass Manager
+    set $wofipass killall wofi || wofipass
+    bindsym --no-repeat $mod+shift+p exec $wofipass
+
+    # Emoji Selector
+    set $womoji killall wofi || womoji
+    bindsym --no-repeat $mod+e exec $womoji
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -220,7 +239,7 @@ bindsym $mod+shift+e mode "exit"
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+t layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
