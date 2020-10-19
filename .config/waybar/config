@@ -24,6 +24,9 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
+    "sway/window": {
+        "max-length": 50
+    },
     
     "idle_inhibitor": {
         "format": "{icon}",
@@ -44,7 +47,7 @@
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false,
-        "on-click": "alacritty -e htop"
+        "on-click": "alacritty -e ytop"
     },
     "memory": {
         "format": "{}% "
@@ -113,7 +116,7 @@
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
-        "max-length": 40,
+        "max-length": 30,
         "format-icons": {
             "spotify": "",
             "default": "🎜"
