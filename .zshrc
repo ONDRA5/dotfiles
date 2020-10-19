@@ -148,7 +148,7 @@ alias aur="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 
 #[[ -z $DISPLAY && XDG_VTNR -eq 1 ]] && exec startx
 
-export TERMINAL='st'
+export TERMINAL='alacritty'
 
 # vi mode
 bindkey -v
