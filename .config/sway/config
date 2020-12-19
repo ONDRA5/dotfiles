@@ -1,5 +1,6 @@
 # Default config for sway
 #
+xwayland enable
 font pango:MononokiNerdFont 13px
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
@@ -32,7 +33,11 @@ set $term alacritty
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/Pictures/Wallpapers/wall_secondary.png fill
+#output * bg ~/Pictures/Wallpapers/wall_secondary.png fill
+output * bg ~/Pictures/Wallpapers/bloodbowl.jpg fill
+output eDP-1 pos 0 0
+output HDMI-A-1 pos 1920 0
+output HDMI-A-1 adaptive_sync on
 #
 # Example configuration:
 #
@@ -64,17 +69,22 @@ for_window [app_id="^.*"] inhibit_idle full
        xkb_options "grp:shift_alt_toggle"
        xkb_options "caps:escape_shifted_capslock"
    }
+   input "1133:49291:Logitech_G502_HERO_Gaming_Mouse" {
+   scroll_factor "1"
+   }
 
 #Borders and stuff
 smart_gaps on
 gaps outer 8
 gaps inner 10
+default_floating_border normal
 default_border pixel 3
 smart_borders on
 
 #Open programs on specific workspaces
-assign [class="firefox"] 1
+assign [app_id="firefox"] 1
 assign [class="Brave"] 1
+assign [app_id="transmission-gtk"] 2
 assign [instance="telegram*"] 4
 assign [class="telegram*"] 4
 assign [app_id="telegram*"] 4
@@ -87,6 +97,7 @@ assign [title="Lutris"] 5
 assign [app_id="mpv"] 6
 assign [app_id="video"] 6
 for_window [class="Spotify"] move to workspace 9
+for_window [app_id="galculator" title="galculator"] floating enable
 
 # Autostart
 exec mako
@@ -131,6 +142,8 @@ mode "media" {
     bindsym n exec playerctl next; mode "default"
     bindsym p exec playerctl previous; mode "default"
     bindsym space exec playerctl play-pause; mode "default"
+    set $wofi_sound_output killall wofi || wofi_sound_output
+    bindsym o exec $wofi_sound_output; mode "default"
     bindsym Escape mode "default"
     }
 bindsym $mod+p mode "media" 
@@ -314,3 +327,9 @@ bindsym $mod+r mode "resize"
 exec waybar
 
 include /etc/sway/config.d/*
+#
+# class                    border   |  backgr  |  text  |  indicator  |  child_border
+client.focused            #458588     #458588    #1d2021  #b16286       #458588
+client.focused_inactive   #1d2021     #1d2021    #d79921  #1d2021       #1d2021
+client.unfocused          #1d2021     #1d2021    #d79921  #1d2021       #1d2021 
+client.urgent             #cc241d     #cc241d    #ebdbb2  #cc241d       #cc241d
