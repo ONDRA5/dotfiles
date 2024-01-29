@@ -102,7 +102,7 @@ for_window [app_id="galculator" title="galculator"] floating enable
 # Autostart
 exec mako
 exec gammastep -l geoclue2
-exec autotiling
+exec autotiling-rs
 exec fusuma -d
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #
